@@ -1,0 +1,48 @@
+<div class="dropdown-container">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="filterOptions()"
+      (focus)="showDropdown = true"
+      (blur)="onBlur()"
+      placeholder="Search..."
+      class="dropdown-input"
+    />
+  
+    <div class="dropdown-list" *ngIf="showDropdown">
+      <ng-container *ngIf="filteredOptions.length > 0; else noRecords">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let option of filteredOptions" (mousedown)="selectRow(option)">
+              <td [innerHTML]="highlight(option.id.toString())"></td>
+              <td [innerHTML]="highlight(option.name)"></td>
+              <td [innerHTML]="highlight(option.email)"></td>
+              <td [innerHTML]="highlight(option.role)"></td>
+              <td [innerHTML]="highlight(option.location)"></td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+  
+      <ng-template #noRecords>
+        <div class="no-records">
+          No records found
+        </div>
+      </ng-template>
+    </div>
+  
+    <div *ngIf="selectedRow" class="selected-details">
+      <h3>Selected Row:</h3>
+      <pre>{{ selectedRow | json }}</pre>
+    </div>
+  </div>
+  
