@@ -1,0 +1,12 @@
+chainlit
+streamlit
+langchain
+openai
+python-dotenv
+fastapi
+uvicorn
+langgraph
+langchain-community 
+langchain-openai
+langchain-google-genai 
+google-generativeai
