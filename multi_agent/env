@@ -2,9 +2,9 @@
 LLM_PROVIDER=gemini
 
 # OpenAI config
-OPENAI_API_KEY=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
+OPENAI_API_KEY=
 OPENAI_MODEL=gpt-3.5-turbo
 
 # Gemini config
-GEMINI_API_KEY=AIzaSyD9r9zPGvyNvZcV2LsCh7V81tCAao1RYTM
+GEMINI_API_KEY=
 GEMINI_MODEL=models/gemini-2.0-flash-thinking-exp
