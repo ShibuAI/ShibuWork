@@ -4,6 +4,7 @@ from agents.research_agent import research_agent
 from agents.summarizer_agent import summarizer_agent
 from agents.critic_agent import critic_agent
 from agents.presenter_agent import presenter_agent
+from agents.context_agent import contextual_response
 
 class AgentState(dict):
     topic: str = ""
@@ -15,7 +16,7 @@ class AgentState(dict):
 def build_agent_graph():
     graph = StateGraph(AgentState)
 
-    graph.add_node("research_node", RunnableLambda(lambda state: {"research": research_agent(state["topic"])}))
+    graph.add_node("research_node", RunnableLambda(lambda state: {"research": contextual_response(state["topic"])}))
     graph.add_node("summarize_node", RunnableLambda(lambda state: {"summary": summarizer_agent(state["research"])}))
     graph.add_node("critique_node", RunnableLambda(lambda state: {"critique": critic_agent(state["research"])}))
     graph.add_node("present_node", RunnableLambda(lambda state: {"report": presenter_agent(state["summary"], state["critique"])}))
