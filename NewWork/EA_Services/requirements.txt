@@ -1,0 +1,20 @@
+# Core LLM dependencies
+langchain==0.1.20
+langchain-core==0.1.53
+langgraph==0.0.39
+langchain-google-genai==0.0.8
+google-generativeai==0.3.2
+
+# Streamlit UI
+streamlit==1.35.0
+
+# API 
+fastapi==0.111.0
+uvicorn==0.30.1
+pydantic==2.7.1
+
+# Utility
+python-dotenv==1.0.1
+
+# test dependencies
+pytest==8.2.2
