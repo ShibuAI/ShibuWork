@@ -1,0 +1,46 @@
+flowchart TD
+ subgraph Row1[" Software/Hardware Inventory"]
+        H1["Redesign TBCR process using Demand"]
+        G1["ServiceNow: Demand Management Submit → Assess → Score → Prioritize → Approve → Create"]
+        F1["TSC: Software Lifecycle"]
+  end
+ subgraph Row2["Software Lifecycle"]
+        H2["Redesign TBCR using Demand or Service Catalog"]
+        G2["ServiceNow: Demand Management with Lifecycle Tracking"]
+        F2["Tags: Mainstream, Deprecated, Obsolete"]
+  end
+ subgraph Row3["New Product Request"]
+        H3["Improved governance & automation"]
+        G3["Demand Management Process"]
+        F3["TBCR → JIRA → Review → Approval"]
+  end
+ subgraph Row4[" Data Sources"]
+        H4["Automated Integration"]
+        G4["IntegrationHub / API → Populate CMDB / SAM / APM"]
+        F4["Flexera API"]
+  end
+ subgraph Row5[" Lifecycle Management"]
+        H5["Structured, automated tracking"]
+        G5["Tracking tied to App/Retirement Workflows"]
+        F5["Compliance Tags:\nStandard, Restricted, etc."]
+  end
+    F1 --> G1
+    G1 --> H1
+    F2 --> G2
+    G2 --> H2
+    F3 --> G3
+    G3 --> H3
+    F4 --> G4
+    G4 --> H4
+    F5 --> G5
+    G5 --> H5
+    D["TSC Vs ServiceNow APM   Key Difference"] --> F1 & F2 & F3 & F4 & F5
+
+    style D fill:#8faadc,stroke:#333,stroke-width:1px
+    style Row1 fill:#f9cb9c,stroke:#333
+    style Row2 fill:#fff2cc,stroke:#333
+    style Row3 fill:#f4cccc,stroke:#333
+    style Row4 fill:#ead1dc,stroke:#333
+    style Row5 fill:#d9ead3,stroke:#333
+
+
