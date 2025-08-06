@@ -1,0 +1,91 @@
+<div class="data-grid-container">
+      <div class="grid-header">
+        <h3>Data View</h3>
+        <div class="view-toggle">
+          <button [class.active]="currentView() === 'data'" 
+                  (click)="switchView('data')">Data</button>
+          <button [class.active]="currentView() === 'exceptions'" 
+                  (click)="switchView('exceptions')">
+            Exceptions ({{ exceptions().length }})
+          </button>
+        </div>
+      </div>
+
+      <!-- Data View -->
+      @if (currentView() === 'data' && gridData()) {
+        <div class="grid-content">
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  @for (column of gridData()!.columns; track column) {
+                    <th>{{ column }}</th>
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                @for (row of paginatedData(); track $index) {
+                  <tr>
+                    @for (column of gridData()!.columns; track column) {
+                      <td>{{ row[column] || '-' }}</td>
+                    }
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          
+          @if (gridData()!.totalRecords > pagination().pageSize) {
+            <div class="pagination">
+              <button [disabled]="pagination().page === 1" 
+                      (click)="goToPage(pagination().page - 1)">Previous</button>
+              <span>Page {{ pagination().page }} of {{ totalPages() }}</span>
+              <button [disabled]="pagination().page === totalPages()" 
+                      (click)="goToPage(pagination().page + 1)">Next</button>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Exceptions View -->
+      @if (currentView() === 'exceptions') {
+        <div class="grid-content">
+          @if (exceptions().length === 0) {
+            <div class="no-data">
+              <p>No validation exceptions found.</p>
+            </div>
+          } @else {
+            <div class="exceptions-list">
+              @for (exception of paginatedExceptions(); track exception.id) {
+                <div class="exception-item"
+                     [class.error]="exception.severity === 'error'"
+                     [class.warning]="exception.severity === 'warning'"
+                     (click)="selectException(exception)">
+                  <div class="exception-header">
+                    <span class="severity-badge">{{ exception.severity }}</span>
+                    <span class="location">Row {{ exception.row }}, Column {{ exception.column }}</span>
+                  </div>
+                  <div class="exception-message">{{ exception.message }}</div>
+                </div>
+              }
+            </div>
+
+            @if (exceptions().length > pagination().pageSize) {
+              <div class="pagination">
+                <button [disabled]="pagination().page === 1" 
+                        (click)="goToPage(pagination().page - 1)">Previous</button>
+                <span>Page {{ pagination().page }} of {{ totalPages() }}</span>
+                <button [disabled]="pagination().page === totalPages()" 
+                        (click)="goToPage(pagination().page + 1)">Next</button>
+              </div>
+            }
+          }
+        </div>
+      }
+
+      @if (!gridData() && currentView() === 'data') {
+        <div class="no-data">
+          <p>No data available. Please upload and process a file first.</p>
+        </div>
+      }
+    </div>

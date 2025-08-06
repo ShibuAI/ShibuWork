@@ -1,0 +1,64 @@
+<div class="chatbot-container">
+      <div class="chat-header">
+        <h3>AI Assistant</h3>
+        <button class="clear-btn" (click)="clearChat()">Clear</button>
+      </div>
+
+      <div class="chat-messages" #messagesContainer>
+        @for (message of messages(); track message.id) {
+          <div class="message-wrapper"
+               [class.user]="message.type === 'user'"
+               [class.system]="message.type === 'system'"
+               [class.error]="message.type === 'error'">
+            
+            <div class="message-content">
+              <div class="message-header">
+                <span class="message-type">
+                  @switch (message.type) {
+                    @case ('user') { <span>👤</span> }
+                    @case ('system') { <span>🤖</span> }
+                    @case ('error') { <span>❌</span> }
+                  }
+                  {{ getMessageTypeLabel(message.type) }}
+                </span>
+                <span class="message-time">{{ formatTime(message.timestamp) }}</span>
+              </div>
+              <div class="message-text">{{ message.message }}</div>
+            </div>
+          </div>
+        }
+
+        @if (isTyping()) {
+          <div class="message-wrapper system">
+            <div class="message-content">
+              <div class="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="chat-input">
+        <div class="input-group">
+          <input type="text" 
+                 [(ngModel)]="currentMessage"
+                 (keyup.enter)="sendMessage()"
+                 [disabled]="isTyping()"
+                 placeholder="Ask about file processing, validation errors..."
+                 class="message-input">
+        
+          <button (click)="sendMessage()" 
+                [disabled]="!currentMessage().trim() || isTyping()"
+                class="send-btn"
+                aria-label="Send message">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M22 2L11 13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        </div>
+      </div>
+    </div>

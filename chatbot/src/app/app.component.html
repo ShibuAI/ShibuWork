@@ -1,0 +1,31 @@
+<div class="app-container">
+  <header class="header">
+    <div class="nav-menu">
+      <button 
+        class="nav-item" 
+        [class.active]="currentView() === 'home'"
+        (click)="showHome()">
+        Home
+      </button>
+      <button 
+        class="nav-item" 
+        [class.active]="currentView() === 'fileProcess'"
+        (click)="showFileProcess()">
+        File Process
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    @if (currentView() === 'home') {
+      <div class="welcome-section">
+        <h1>Welcome to File Processing System</h1>
+        <p>Click on "File Process" to upload and validate files.</p>
+      </div>
+    }
+    
+    @if (currentView() === 'fileProcess') {
+        <app-main-layout />
+    }
+  </main>
+</div>

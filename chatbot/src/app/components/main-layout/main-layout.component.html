@@ -1,0 +1,74 @@
+<div class="app-container">
+    <header class="app-header">
+        <h1>File Processing Tool</h1>
+
+    </header>
+
+    <div >
+        <div >
+            <app-file-processor />
+        </div>
+
+        <div class="main-content">
+
+            <div class="left-panel">
+                <div class="grid-section">
+                    <app-data-grid />
+                </div>
+
+
+            </div>
+            <div class="right-panel">
+                <div class="panel-header">
+                    <h2>💬 Chat Assistant</h2>
+                    <div class="chat-status">
+                        <span class="status-indicator online"></span>
+                        <span>Online</span>
+                    </div>
+                </div>
+                <app-chatbot />
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- 
+<div class="chatbot-widget">
+       
+        @if (isChatbotOpen()) {
+          <div class="chatbot-window" (click)="$event.stopPropagation()">
+            <div class="chatbot-header">
+              <h4>AI Assistant</h4>
+              <button class="close-btn" (click)="toggleChatbot()">✕</button>
+            </div>
+            <div class="chatbot-content">
+              <app-chatbot />
+            </div>
+          </div>
+        }
+
+       
+        <button 
+          class="chat-toggle-btn"
+          [class.open]="isChatbotOpen()"
+          (click)="toggleChatbot()"
+          [attr.aria-label]="isChatbotOpen() ? 'Close chat' : 'Open chat'"
+        >
+          @if (isChatbotOpen()) {
+            <span class="icon">✕</span>
+          } @else {
+            <span class="icon">💬</span>
+          }
+          
+         
+          @if (hasNewMessages() && !isChatbotOpen()) {
+            <span class="notification-badge"></span>
+          }
+        </button>
+      </div> -->
+
+      <!-- Backdrop for mobile -->
+    @if (isChatbotOpen()) {
+      <div class="chatbot-backdrop" (click)="toggleChatbot()"></div>
+    }
